@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <!-- 是一个管理类，可允许用户左右切换当前的View  -->
+    <android.support.v4.view.ViewPager
+	    android:id="@+id/hotstoriespagers"
+	    android:layout_height="200dp"
+	    android:layout_width="fill_parent"
+	    android:orientation="horizontal">
+	</android.support.v4.view.ViewPager>
+	<!-- 存放左右切换View对象的LinearLayout容器 -->
+	<LinearLayout
+        android:id="@+id/topstory_dotgroups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/hotstoriespagers"
+        android:layout_marginBottom="8dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+        <View
+            android:id="@+id/dot_0"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_focused" />
+
+        <View
+            android:id="@+id/dot_1"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+
+        <View
+            android:id="@+id/dot_2"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+
+        <View
+            android:id="@+id/dot_3"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+
+        <View
+            android:id="@+id/dot_4"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+    </LinearLayout>
+    <!-- 今天的日期 -->
+	<TextView 
+	    android:id="@+id/tv_todaynews"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hotstoriespagers"
+        android:layout_marginTop="8sp"
+		android:layout_marginLeft="10sp"
+		android:layout_marginRight="10sp"
+		android:layout_marginBottom="8sp"
+        android:textSize="22sp"
+        android:text=""/>
+	
+	<com.example.zhihupocket.ListViewForScrollViewInMainXML 
+        android:id="@+id/lv_todaynews"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_todaynews"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+	    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+	    android:layout_marginRight="@dimen/activity_horizontal_margin"
+	    android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:divider="#00000000"
+        android:dividerHeight="4dp">
+    </com.example.zhihupocket.ListViewForScrollViewInMainXML>
+</RelativeLayout>
