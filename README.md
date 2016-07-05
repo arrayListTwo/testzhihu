@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 知乎日报·今日
 ==========
 
@@ -38,3 +39,6 @@ android-support-v7-appcompat.jar
 * 内容界面：使用webview进行网页的加载
 
 * README
+=======
+# testzhihu
+>>>>>>> f5d87343225b7321cc123ded94ec774c16202001
