@@ -29,7 +29,7 @@ import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-/*
+/**
  * PagedHeadListView可以用这个开源项目做
  */
 public class MainActivity extends FragmentActivity {
@@ -39,6 +39,9 @@ public class MainActivity extends FragmentActivity {
 	 */
 	public static final String ZHIHU_API_TODAY = "http://news-at.zhihu.com/api/3/news/latest";
 	
+	/**
+	 * 今日新闻的url的前缀
+	 */
 	public static final String ZHIHU_STORY_API = "http://daily.zhihu.com/story/";
 	
 	public static final String ZHIHU_API_BEFORE = "http://news.at.zhihu.com/api/3/news/before/";

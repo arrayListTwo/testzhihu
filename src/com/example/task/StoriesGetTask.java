@@ -166,7 +166,6 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 		
 		// 先从数据库中取数据
 		if (stories_group != null) {
-			Log.v("StoriesGetTask", "成功从数据库获得以前的消息+消息数量"+stories_group.size());
 			return true;
 		}
 		else {
