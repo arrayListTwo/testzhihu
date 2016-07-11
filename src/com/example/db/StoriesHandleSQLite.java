@@ -49,7 +49,7 @@ public class StoriesHandleSQLite {
 	/**
 	 * 将普通新闻放入数据库中
 	 * @param stories_group 普通新闻集合
-	 * @return 
+	 * @return true表示插入普通数据库成功；false表示插入普通数据库失败
 	 */
 	public boolean storedStoriesIntoDB(ArrayList<HashMap<String, Object>> stories_group){
 		try {

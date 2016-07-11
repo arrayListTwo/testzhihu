@@ -49,7 +49,7 @@ public class TopStoriesHandleSQLite {
 	/**
 	 * 将加载出来的今日头条新闻存储到数据库中
 	 * @param topstories_group 存储头条新闻的集合
-	 * @return 
+	 * @return true表示插入头条数据库成功；false表示插入头条数据库失败
 	 */
 	public boolean storedTopStoriesIntoDB(ArrayList<HashMap<String, Object>> topstories_group){
 		try {
@@ -57,14 +57,16 @@ public class TopStoriesHandleSQLite {
 			dbhelper = new MainDBHelper(context, MainDBHelper.DATABASE_NAME, null, 1);
 			// 判断数据库中是否有原来记录
 			db = dbhelper.getReadableDatabase();
+			//查询语句，从存储头条新闻的表中查询出id列，查询条件是数据库中的日期是当前日期。selection指定where约束条件，selectionArgs为where中的占位符提供具体的值
 			Cursor cursor = db.query(MainDBHelper.TABLE_TOPSTORIES, new String[]{"id"},"date="+date, null, null, null, null, null);
+			Log.v("My", "从数据库中查询了是否有原纪录");
 			// 删除数据库中原来有记录
 			db = dbhelper.getWritableDatabase();
 			if (cursor.getCount() != 0) {
 				String del = "delete from '"+MainDBHelper.TABLE_TOPSTORIES+"' where date='"+date+"'";
 				db.execSQL(del);
 			}
-			
+			//创建ContentValues对象，存储数据库插入数据时的数据
 			ContentValues values = new ContentValues();
 			for (int i = 0; i < topstories_group.size(); i++) {
 				 values.put("date", date);
@@ -75,6 +77,7 @@ public class TopStoriesHandleSQLite {
 				 values.put("share_url", topstories_group.get(i).get("share_url").toString());
 				 values.put("ga_prefix", topstories_group.get(i).get("ga_prefix").toString());
 				 db.insert(MainDBHelper.TABLE_TOPSTORIES, "id", values);
+				 //清除ContentValues对象里存储的数据
 				 values.clear();
 			}
 			db.close();
@@ -88,14 +91,13 @@ public class TopStoriesHandleSQLite {
 	
 	/**
 	 * 从数据库中取出今日普通新闻
-	 * @return
+	 * @return 若数据库不为空，则返回存储普通新闻的ArrayList<HashMap<String, Object>>类型数据；若数据库为空则返回null
 	 */
 	public ArrayList<HashMap<String, Object>> getTopStoriesFromDB(){
 		try {
 			dbhelper = new MainDBHelper(context, MainDBHelper.DATABASE_NAME, null, 1);
 			db = dbhelper.getReadableDatabase();
 			Cursor cursor = db.query(MainDBHelper.TABLE_TOPSTORIES, new String[]{"id", "image", "title", "type", "share_url", "ga_prefix"},"date="+date, null, null, null, "ga_prefix DESC", null);
-			Log.v("TopStoriesHandleSQLite.getStoriesFromDB", cursor.getCount()+"");
 			if (cursor.getCount() == 0) {
 				Toast.makeText(context, "数据库出现错误！", Toast.LENGTH_SHORT).show();
 				return null;
@@ -119,7 +121,6 @@ public class TopStoriesHandleSQLite {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			db.close();
 			dbhelper.close();

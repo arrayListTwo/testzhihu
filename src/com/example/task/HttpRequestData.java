@@ -11,10 +11,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
-import android.util.Log;
-
 /**
- * 访问网络的工具类
+ * 访问网络的工具类，使用的是HttpClient类
  * @author lei
  *
  */
@@ -51,7 +49,6 @@ public class HttpRequestData {
 				HttpEntity httpEntity = httpresponse.getEntity();
 				//获得返回的字符串
 				String json_data = EntityUtils.toString(httpEntity, "utf-8");
-				Log.v("HttpRequestData", "成功解析并返回");
 				return json_data;
 			}
 			else{

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * 管理界面中的视图
+ * 管理界面中的视图接口
  * @author lei
  *
  */

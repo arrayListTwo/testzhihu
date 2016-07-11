@@ -36,15 +36,18 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 	private String json_data;
 	
 	/**
-	 * 存储普通新闻 
+	 * 存储普通新闻 json数据
 	 */
 	private ArrayList<HashMap<String, Object>> stories_group = new ArrayList<HashMap<String,Object>>();
 	
 	/**
-	 * 存储头条新闻 
+	 * 存储头条新闻 json数据
 	 */
 	private ArrayList<HashMap<String, Object>> topstories_group = new ArrayList<HashMap<String,Object>>();
 	
+	/**
+	 * 管理界面中的视图
+	 */
 	private LoadingBaseNews loadingnews;
 	
 	/**
@@ -99,7 +102,7 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 	 * 获取今天的数据
 	 * @return true表示成功从网络或者数据库获取今日新闻；false表示获取今日新闻失败
 	 */
-	public boolean getTodayNews(){		
+	public boolean getTodayNews(){
 		
 		TopStoriesHandleSQLite top = new TopStoriesHandleSQLite(main);
 		
@@ -110,7 +113,6 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 			// 成功获取今日新闻，存入数据库
 			if (top.storedTopStoriesIntoDB(topstories_group) && general.storedStoriesIntoDB(stories_group)) {
 				// 在runviews之后需要进行修改系统时间
-				Log.v("StoriesGetTask", "成功从网络处获得今日消息并存入数据库");
 				MainActivity.sys_calendar = Calendar.getInstance();
 				return true;
 			}
@@ -123,6 +125,7 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 			if (stories_group != null && topstories_group != null) {
 				// 在runviews之后需要进行修改系统时间
 				MainActivity.sys_calendar = Calendar.getInstance();
+				Log.v("My", MainActivity.DATEFORMAT.format((MainActivity.sys_calendar.getTime())));
 				return true;
 			}
 			return false;
@@ -135,6 +138,7 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 	 */
 	public boolean getTodayNewsFromOnLine(){
 		
+		//通过网络获取json数据
 		json_data = HttpRequestData.getJsonContent(MainActivity.ZHIHU_API_TODAY); 
 		
 		if (json_data.equals("-1")) {

@@ -63,13 +63,13 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//对缓存图片进行初始化配置
+		//ImageLoaderConfigurations配置
 		initImageLoaderConfigurations();
 		//初始化下拉菜单，并给下拉和上拉加上监听器
 		initPullToRefresh();
 		//日期的初始化
 		initCalendar();
-		//进入界面之后加载今日新闻
+		//打开APP之后加载今日新闻
 		new StoriesGetTask(MainActivity.this, new LoadingTodayNews(MainActivity.this, main_swiperefresh), main_swiperefresh, "today").execute();
 	}
 	
@@ -84,6 +84,7 @@ public class MainActivity extends FragmentActivity {
 	 * 初始化下拉菜单，并给下拉和上拉加上监听器
 	 */
 	public void initPullToRefresh(){
+		
 		//获取到PullToRefreshScrollView对象
 		main_swiperefresh = (PullToRefreshScrollView)findViewById(R.id.main_sv);
 		
@@ -96,7 +97,7 @@ public class MainActivity extends FragmentActivity {
 				if (PullToRefreshBase.Mode.PULL_FROM_START == main_swiperefresh.getCurrentMode()) {
 					new StoriesGetTask(MainActivity.this, new LoadingTodayNews(MainActivity.this, main_swiperefresh), main_swiperefresh, "today").execute();
 				}
-				// 下拉加载
+				// 上拉加载
 				else if (PullToRefreshBase.Mode.PULL_FROM_END == main_swiperefresh.getCurrentMode()) {
 					new StoriesGetTask(MainActivity.this, new LoadingPreNew(MainActivity.this, main_swiperefresh), main_swiperefresh, "before").execute();
 				}
@@ -112,7 +113,7 @@ public class MainActivity extends FragmentActivity {
 	}
 	
 	/**
-	 * 图片加载配置
+	 * ImageLoaderConfigurations配置
 	 * @return
 	 */
 	public boolean initImageLoaderConfigurations(){
@@ -136,7 +137,6 @@ public class MainActivity extends FragmentActivity {
 			ImageLoader.getInstance().init(config);
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return false;
 		}
@@ -166,7 +166,6 @@ public class MainActivity extends FragmentActivity {
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		return super.onKeyDown(keyCode, event);
 	}
 	
