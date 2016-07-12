@@ -51,7 +51,7 @@ public class ParseJsonTopStories {
 				story_item.put("type", json_topstories.getJSONObject(i).getString("type"));
 				story_item.put("id", json_topstories.getJSONObject(i).getString("id"));
 				story_item.put("ga_prefix", json_topstories.getJSONObject(i).getString("ga_prefix"));
-				// 最近知乎改了接口，原来的接口不能用了
+				// 记录新闻的url
 				if(json_topstories.getJSONObject(i).has("share_url")){
 					story_item.put("share_url", json_topstories.getJSONObject(i).getString("share_url"));
 				}

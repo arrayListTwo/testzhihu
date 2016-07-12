@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.zhihupocket.MainActivity;
@@ -59,7 +58,6 @@ public class TopStoriesHandleSQLite {
 			db = dbhelper.getReadableDatabase();
 			//查询语句，从存储头条新闻的表中查询出id列，查询条件是数据库中的日期是当前日期。selection指定where约束条件，selectionArgs为where中的占位符提供具体的值
 			Cursor cursor = db.query(MainDBHelper.TABLE_TOPSTORIES, new String[]{"id"},"date="+date, null, null, null, null, null);
-			Log.v("My", "从数据库中查询了是否有原纪录");
 			// 删除数据库中原来有记录
 			db = dbhelper.getWritableDatabase();
 			if (cursor.getCount() != 0) {
