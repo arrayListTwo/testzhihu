@@ -20,33 +20,70 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+/**
+ * 新闻内容
+ * 
+ * @author lei
+ *
+ */
 @SuppressWarnings("unused")
 public class StoryContent extends Activity{
 	
+	/**
+	 * 新闻集合
+	 */
 	private ArrayList<HashMap<String, Object>> top_or_not_stories_group;
+	
+	/**
+	 * 点击新闻的位置position
+	 */
 	private int story_order;
+	
+	/**
+	 * 新闻集合的长度
+	 */
 	private int story_number;
+	
+	/**
+	 * WebView组件对象
+	 */
 	private WebView wv_show_story;
+	
+	/**
+	 * 
+	 */
 	private ProgressBar progress;
+	
+	/**
+	 * 
+	 */
 	private ShareActionProvider mShareActionProvider; // 分享按钮
+	
+	/**
+	 * 
+	 */
 	private String title;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.story_content);
-		//添加一个回退键
+		//在界面左上方添加一个回退键
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
+		//获取到传递过来的新闻集合
 		initStoriesGroup();
+		//初始化webview控件
 		initAllView();
+		
 		loadStory();
 		
 	}
 
-	// 初始化listView数组
+	/**
+	 * 获取到传递过来的新闻集合
+	 */
 	@SuppressWarnings("unchecked")
 	public void initStoriesGroup(){
 		try {
@@ -56,42 +93,44 @@ public class StoryContent extends Activity{
 			story_order = this.getIntent().getIntExtra("story_order", 0);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}	
 		story_number = top_or_not_stories_group.size();
 	}
 	
-	// 初始化webview控件
+	/**
+	 * 初始化webview控件
+	 */
 	@SuppressLint("SetJavaScriptEnabled")
 	public void initAllView(){
 		wv_show_story = (WebView)findViewById(R.id.wv_show_story);
 		progress = (ProgressBar)findViewById(R.id.pb_show_progress);
-		// 支持缩放
+		// 对WebView的基本设置
 		wv_show_story.getSettings().setBuiltInZoomControls(false);
 		wv_show_story.getSettings().setJavaScriptEnabled(true);
 	}
 	
-	// 加载数据
+	/**
+	 * 加载数据
+	 */
 	public void loadStory(){
 		// 加载链接
 		wv_show_story.setWebViewClient(new WebViewClient(){
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				// TODO Auto-generated method stub
+				//根据传入的参数再去加载新的网页
 				view.loadUrl(url);
+				//表示当前WebView可以处理打开新网页的请求，不用借助系统浏览器
 				return true;
-//				return super.shouldOverrideUrlLoading(view, url);
 			}
 			
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
 					String description, String failingUrl) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "Oh no, "+description, Toast.LENGTH_SHORT).show();
-//				super.onReceivedError(view, errorCode, description, failingUrl);
+				Toast.makeText(getApplicationContext(), "Oh no, " + description, Toast.LENGTH_SHORT).show();
 			}
 		});
+		
 		wv_show_story.setWebChromeClient(new WebChromeClient(){
 			@Override
 			public void onProgressChanged(WebView view, int newProgress){
@@ -103,10 +142,13 @@ public class StoryContent extends Activity{
 				}
 			}
 		});
+		//加载此网址，显示点击的新闻内容
 		wv_show_story.loadUrl(top_or_not_stories_group.get(story_order).get("share_url").toString());
+		
 		if (mShareActionProvider != null) {
 			mShareActionProvider.setShareIntent(createShareStory());
 		}
+		
 	}
 	
 	@Override

@@ -1,13 +1,9 @@
 package com.example.adapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +14,7 @@ import android.widget.TextView;
 import com.example.zhihupocket.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
  * 普通新闻的适配器类
@@ -41,14 +35,9 @@ public class StoriesAdapter extends BaseAdapter{
 		private ArrayList<HashMap<String, Object>> stories_group;
 		
 		/**
-		 * 
+		 * 加载图片时的配置
 		 */
 		private DisplayImageOptions options;
-		
-		/**
-		 * 
-		 */
-		private AnimateFirstDisplayListener animateFirstListener;
 		
 		//构造函数
 		public StoriesAdapter(Context context, ArrayList<HashMap<String, Object>> stories_group) {
@@ -56,7 +45,6 @@ public class StoriesAdapter extends BaseAdapter{
 			this.stories_group = stories_group;
 			//对图片下载时初始化
 			initImageLoaderOptions();
-			animateFirstListener = new AnimateFirstDisplayListener(); 
 		}
 		
 		/**
@@ -98,7 +86,11 @@ public class StoriesAdapter extends BaseAdapter{
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup Parent){
+			
+			//内部类，临时存储，提高性能
 			PicAndTextViewGroup picandtext = null;
+			
+			//判断是否有缓存组件的id
 			if(convertView == null){
 				picandtext = new PicAndTextViewGroup();
 				convertView = mInflater.inflate(R.layout.main_lv_item, null);
@@ -109,35 +101,27 @@ public class StoriesAdapter extends BaseAdapter{
 			else{
 				picandtext = (PicAndTextViewGroup)convertView.getTag();
 			}
+			
 			String images = stories_group.get(position).get("images").toString();
 			if (!images.equals("none")) {
 				ImageLoader.getInstance().displayImage(stories_group.get(position).get("images").toString()
-						, picandtext.iv_story_img, options, animateFirstListener);
+						, picandtext.iv_story_img, options);
 			}
 			picandtext.tv_story_title.setText(stories_group.get(position).get("title").toString());
+			
 			return convertView;
 		}
 		
+		/**
+		 * 内部类，存储组件id，提高性能
+		 * @author lei
+		 *
+		 */
 		private class PicAndTextViewGroup{
+			//记录子项图片的id
 			ImageView iv_story_img;
+			//记录子项文字的id
 			TextView tv_story_title;
-		}
-		
-		private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
-
-			static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-
-			@Override
-			public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-				if (loadedImage != null) {
-					ImageView imageView = (ImageView) view;
-					boolean firstDisplay = !displayedImages.contains(imageUri);
-					if (firstDisplay) {
-						FadeInBitmapDisplayer.animate(imageView, 500);
-						displayedImages.add(imageUri);
-					}
-				}
-			}
 		}
 		
 	}
