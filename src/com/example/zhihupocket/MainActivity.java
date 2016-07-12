@@ -39,6 +39,9 @@ public class MainActivity extends FragmentActivity {
 	 */
 	public static final String ZHIHU_API_TODAY = "http://news-at.zhihu.com/api/3/news/latest";
 	
+	/**
+	 * 知乎今日新闻的url前缀
+	 */
 	public static final String ZHIHU_STORY_API = "http://daily.zhihu.com/story/";
 	
 	public static final String ZHIHU_API_BEFORE = "http://news.at.zhihu.com/api/3/news/before/";

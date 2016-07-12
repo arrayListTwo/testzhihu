@@ -6,8 +6,6 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 import com.example.zhihupocket.MainActivity;
 
 /**
@@ -67,10 +65,9 @@ public class ParseJsonStories {
 				// 判断数组中是否存在images这个项目
 				if(json_stories.getJSONObject(i).has("images")){
 					String str = json_stories.getJSONObject(i).getString("images");
-					Log.v("images", str);
+					//对url进行处理
 					str = HandleStringAndImage.getHandledURL(str);					
 					story_item.put("images", str);
-//					story_item.put("imguri", HandleStringAndImage.downloadPic(str, MainActivity.pic_cache));
 				}
 				else {
 					story_item.put("images", "none");

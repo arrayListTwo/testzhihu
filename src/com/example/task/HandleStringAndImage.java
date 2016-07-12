@@ -12,6 +12,11 @@ import android.net.Uri;
 
 public class HandleStringAndImage {
 	
+	/**
+	 * 将json数据中的链接转化成真实链接
+	 * @param ori_url json中的链接
+	 * @return 普通的链接url
+	 */
 	public static String getHandledURL(String ori_url){
 		String step_one = ori_url.replace("\\", "");
 		String step_two = step_one.replace("[", "");
