@@ -8,8 +8,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +16,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 /**
@@ -50,7 +49,7 @@ public class StoryContent extends Activity{
 	private WebView wv_show_story;
 	
 	/**
-	 * 
+	 * 加载进度条
 	 */
 	private ProgressBar progress;
 	
@@ -131,13 +130,14 @@ public class StoryContent extends Activity{
 			}
 		});
 		
+		//管理进度条
 		wv_show_story.setWebChromeClient(new WebChromeClient(){
 			@Override
 			public void onProgressChanged(WebView view, int newProgress){
 				super.onProgressChanged(view, newProgress);
 				progress.setProgress(newProgress);
 				// 当进度到100%时，结束，视图变为不见
-				if (newProgress == 100 || wv_show_story.getHeight()!=0) {
+				if (newProgress == 100 || wv_show_story.getHeight() != 0) {
 					progress.setVisibility(View.GONE);
 				}
 			}
@@ -153,7 +153,6 @@ public class StoryContent extends Activity{
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub		
 		if(keyCode == KeyEvent.KEYCODE_BACK && wv_show_story.canGoBack()){
 			wv_show_story.goBack();
 			return true;
@@ -165,7 +164,6 @@ public class StoryContent extends Activity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
@@ -187,8 +185,10 @@ public class StoryContent extends Activity{
         MenuItem menuItem = menu.findItem(R.id.story_share);
 
         // Get the provider and hold onto it to set/change the share intent.
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-		return super.onCreateOptionsMenu(menu);
+       /* mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+		return super.onCreateOptionsMenu(menu);*/
+        mShareActionProvider = (ShareActionProvider)menuItem.getActionProvider();
+        return true;
 	}
 	
 	// 分享故事
@@ -202,7 +202,6 @@ public class StoryContent extends Activity{
 	
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
 		if (wv_show_story != null && wv_show_story.canGoBack()) {
 			wv_show_story.goBack();
 		}
