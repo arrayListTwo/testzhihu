@@ -117,14 +117,12 @@ public class LoadingTodayNews implements LoadingBaseNews{
 		//为下方普通新闻的ListView对象设置适配器
 		StoriesAdapter loadlistadapter = new StoriesAdapter(main.getApplicationContext(), stories_group);
 		lv_showshortcontent.setAdapter(loadlistadapter);
-		
 		//设置点击下方ListView普通新闻时的监听器
 		lv_showshortcontent.setOnItemClickListener(new StoryItemClickListener(main.getApplicationContext(), stories_group));
 		
 		//为上方左右切换的头条新闻设置适配器
 		hotstoriespagers.setAdapter(new HotStoriesPagersAdapter(main.getSupportFragmentManager(), m_topstoriesgroup));
 		hotstoriespagers.setVisibility(View.VISIBLE);
-		
 		// 为上方左右切换的头条新闻添加点击监听器
 		hotstoriespagers.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("NewApi")

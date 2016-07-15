@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,7 @@ import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 /**
- * 新闻内容
+ * 新闻的详细内容
  * 
  * @author lei
  *
@@ -54,9 +55,9 @@ public class StoryContent extends Activity{
 	private ProgressBar progress;
 	
 	/**
-	 * 
+	 * 分享按钮
 	 */
-	private ShareActionProvider mShareActionProvider; // 分享按钮
+	private ShareActionProvider mShareActionProvider;
 	
 	/**
 	 * 
@@ -75,7 +76,7 @@ public class StoryContent extends Activity{
 		initStoriesGroup();
 		//初始化webview控件
 		initAllView();
-		
+		//加载新闻数据
 		loadStory();
 		
 	}
@@ -142,13 +143,51 @@ public class StoryContent extends Activity{
 				}
 			}
 		});
+		
 		//加载此网址，显示点击的新闻内容
 		wv_show_story.loadUrl(top_or_not_stories_group.get(story_order).get("share_url").toString());
 		
-		if (mShareActionProvider != null) {
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		// 初始化菜单
+		getMenuInflater().inflate(R.menu.story_content_actionbar, menu);
+		//获得菜单Item对象
+        MenuItem menuItem = menu.findItem(R.id.story_share);
+        //获得分享按钮对象
+        mShareActionProvider = (ShareActionProvider)menuItem.getActionProvider();
+       
+        if (mShareActionProvider != null) {
+        	//为分享按钮设置分享内容
 			mShareActionProvider.setShareIntent(createShareStory());
 		}
-		
+        
+        return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+		case R.id.story_exit:
+			finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	/**
+	 * 设置分享按钮需要的Intent
+	 * @return Intent对象
+	 */
+	public Intent createShareStory(){
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_TEXT, top_or_not_stories_group.get(story_order).get("share_url").toString());
+		return intent;
 	}
 	
 	@Override
@@ -160,44 +199,6 @@ public class StoryContent extends Activity{
 		else {
 			return super.onKeyDown(keyCode, event);
 		}
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			return true;
-		case R.id.story_exit:
-			finish();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu){
-		// 初始化ActionBar
-		getMenuInflater().inflate(R.menu.story_content_actionbar, menu);
-		
-		// Retrieve the share menu item
-        MenuItem menuItem = menu.findItem(R.id.story_share);
-
-        // Get the provider and hold onto it to set/change the share intent.
-       /* mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-		return super.onCreateOptionsMenu(menu);*/
-        mShareActionProvider = (ShareActionProvider)menuItem.getActionProvider();
-        return true;
-	}
-	
-	// 分享故事
-	public Intent createShareStory(){
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_TEXT, top_or_not_stories_group.get(story_order).get("title").toString());
-		return intent;		
 	}
 	
 	@Override

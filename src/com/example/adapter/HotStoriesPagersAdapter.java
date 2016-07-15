@@ -13,11 +13,16 @@ import android.support.v4.view.PagerAdapter;
 public class HotStoriesPagersAdapter extends FragmentStatePagerAdapter {
 
 	private final String[] TITLES = { "one", "two", "three", "four", "five"};
+	
+	/**
+	 * 头条新闻的集合
+	 */
 	private ArrayList<HashMap<String, Object>> top_stories = new ArrayList<HashMap<String, Object>>();
 	
 	public HotStoriesPagersAdapter(FragmentManager fm, ArrayList<HashMap<String, Object>> top_stories) {
 		super(fm);
 		this.top_stories = top_stories;
+		//对显示图片的初始化配置
 		MainHotStoriesFragment.initDisplayImageOptions();
 	}
 

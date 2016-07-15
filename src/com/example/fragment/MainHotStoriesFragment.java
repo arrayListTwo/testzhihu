@@ -1,5 +1,6 @@
 package com.example.fragment;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,7 +28,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainHotStoriesFragment extends Fragment implements OnClickListener{
+/**
+ * @author lei
+ *
+ */
+@SuppressLint("ValidFragment") public class MainHotStoriesFragment extends Fragment implements OnClickListener{
 
 	private static final String ARG_POSITION = "position";
 
@@ -43,12 +48,18 @@ public class MainHotStoriesFragment extends Fragment implements OnClickListener{
 		return f;
 	}
 	
+	public MainHotStoriesFragment() {
+		super();
+	}
+
 	public MainHotStoriesFragment(ArrayList<HashMap<String, Object>> top_stories) {
-		// TODO Auto-generated constructor stub
 		this.top_stories = top_stories;
 	}
 	
-	// 初始化配置
+	/**
+	 * 对加载图片的初始化配置
+	 * @return 配置成功返回true，配置失败返回false
+	 */
 	public static boolean initDisplayImageOptions(){
 		try {
 			options = new DisplayImageOptions.Builder()
@@ -64,7 +75,6 @@ public class MainHotStoriesFragment extends Fragment implements OnClickListener{
 			.build();
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
 			return false;
 		}
 	}
