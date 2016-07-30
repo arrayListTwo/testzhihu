@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.zhihupocket.MainActivity;
@@ -93,8 +92,7 @@ public class StoriesHandleSQLite {
 		try {
 			dbhelper = new MainDBHelper(context, MainDBHelper.DATABASE_NAME, null, 1);
 			db = dbhelper.getReadableDatabase();
-			Cursor cursor = db.query(MainDBHelper.TABLE_STORIES, new String[]{"id", "images", "title", "type", "share_url", "ga_prefix"},"date="+date, null, null, null, "ga_prefix DESC", null);
-			Log.v("TopStoriesHandleSQLite.getStoriesFromDB", cursor.getColumnCount()+"");
+			Cursor cursor = db.query(MainDBHelper.TABLE_STORIES, new String[]{"id", "images", "title", "type", "share_url", "ga_prefix"},"date=" + date, null, null, null, "ga_prefix DESC", null);
 			if (cursor.getCount() == 0) {
 				Toast.makeText(context, "数据库出现错误！", Toast.LENGTH_SHORT).show();
 				return null;

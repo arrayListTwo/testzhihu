@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 /**
+ * 
  * @author lei
  *
  */
@@ -55,9 +56,6 @@ public class LoadingPreNew implements LoadingBaseNews{
 	}
 	
 	// 初始化视图
-	/* (non-Javadoc)
-	 * @see com.example.news.LoadingBaseNews#initView()
-	 */
 	@SuppressLint({ "InlinedApi", "InflateParams" })
 	public void initView(){
 		LinearLayout main_ll = (LinearLayout) main.findViewById(R.id.main_rl);
@@ -86,7 +84,7 @@ public class LoadingPreNew implements LoadingBaseNews{
 		lv_showshortcontent.setOnItemClickListener(new StoryItemClickListener(main.getApplicationContext(), stories_group));
 	    main_swiperefresh.onRefreshComplete();
 	    // 将系统的时间延后一天
-	    MainActivity.sys_calendar.add(Calendar.DATE, -1);
+//	    MainActivity.sys_calendar.add(Calendar.DATE, -1);
 	}
 	
 }

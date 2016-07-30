@@ -91,9 +91,13 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 	@Override
 	protected Boolean doInBackground(Void... params) {
 		if (query_type.equals("today")) {
+			//今日日期
+			MainActivity.sys_calendar = Calendar.getInstance();
 			return getTodayNews();
 		}
 		else {
+			// 日期向前推一天，用于判断数据库中是否有此日的记录
+			MainActivity.sys_calendar.add(Calendar.DATE, -1);
 			return getPreNews();
 		}
 	}
@@ -112,8 +116,6 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 		if (getTodayNewsFromOnLine()) {
 			// 成功获取今日新闻，存入数据库
 			if (top.storedTopStoriesIntoDB(topstories_group) && general.storedStoriesIntoDB(stories_group)) {
-				// 在runviews之后需要进行修改系统时间
-				MainActivity.sys_calendar = Calendar.getInstance();
 				return true;
 			}
 			return false;
@@ -123,9 +125,6 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 			topstories_group = (top).getTopStoriesFromDB();
 			stories_group = (general).getStoriesFromDB();
 			if (stories_group != null && topstories_group != null) {
-				// 在runviews之后需要进行修改系统时间
-				MainActivity.sys_calendar = Calendar.getInstance();
-				Log.v("My", MainActivity.DATEFORMAT.format((MainActivity.sys_calendar.getTime())));
 				return true;
 			}
 			return false;
@@ -183,13 +182,20 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 	
 	// 从网络上获得之前新闻
 	public boolean getPreNewsFromOnLine(){
-		// 将日历提前一天,这个要是直接用形参额话有bug
-		MainActivity.sys_calendar.add(Calendar.DATE, -1);
+		// 将日历提前一天，附加到旧新闻API的后面，获取json数据
+		MainActivity.sys_calendar.add(Calendar.DATE, 1);
 		Date format = MainActivity.sys_calendar.getTime();
 		String date = MainActivity.DATEFORMAT.format(format);
-		// 全局日期恢复正常
-		MainActivity.sys_calendar.add(Calendar.DATE, 1);
-		json_data = HttpRequestData.getJsonContent(MainActivity.ZHIHU_API_BEFORE+date); 
+		Log.v("testdate", "这是获取旧新闻的附加的日期--->" + date);
+		json_data = HttpRequestData.getJsonContent(MainActivity.ZHIHU_API_BEFORE + date); 
+	
+		//记录获取到的最早的日期
+		MainActivity.sys_calendar.add(Calendar.DATE, -1);
+		
+		Date format2 = MainActivity.sys_calendar.getTime();
+		String date2 = MainActivity.DATEFORMAT.format(format2);
+		Log.v("testdate", "这是获取旧新闻的正确日期--->" + date2);
+		
 		if (json_data.equals("-1")) {
 			return false;
 		}

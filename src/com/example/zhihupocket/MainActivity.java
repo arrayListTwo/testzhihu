@@ -42,10 +42,13 @@ public class MainActivity extends FragmentActivity {
 	public static final String ZHIHU_API_TODAY = "http://news-at.zhihu.com/api/3/news/latest";
 	
 	/**
-	 * 今日新闻的url的前缀
+	 * 新闻详细内容的url的前缀
 	 */
 	public static final String ZHIHU_STORY_API = "http://daily.zhihu.com/story/";
 	
+	/**
+	 * 获取旧消息的API接口（后面需要加上日期，若查询2016年6月14日新闻则需要加上20160615）
+	 */
 	public static final String ZHIHU_API_BEFORE = "http://news.at.zhihu.com/api/3/news/before/";
 	
 	/**

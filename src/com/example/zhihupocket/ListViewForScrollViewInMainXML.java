@@ -8,7 +8,6 @@ public class ListViewForScrollViewInMainXML extends ListView{
 
 	public ListViewForScrollViewInMainXML(Context arg0) {
 		super(arg0);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ListViewForScrollViewInMainXML(Context arg0, AttributeSet arg1){

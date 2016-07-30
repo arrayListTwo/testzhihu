@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.example.adapter.StoriesAdapter;
 import com.example.listener.StoryItemClickListener;
 import com.example.zhihupocket.MainActivity;
 import com.example.zhihupocket.R;
-import com.example.zhihupocket.StoryContent;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 /**
@@ -98,6 +96,7 @@ public class LoadingTodayNews implements LoadingBaseNews{
 		}
 		tv_todaynews = (TextView)hotstories_container.getChildAt(2);
 		lv_showshortcontent = (ListView)hotstories_container.getChildAt(3);
+		//添加布局文件
 		main_ll.addView(hotstories_container);
 		
 	}
@@ -140,10 +139,11 @@ public class LoadingTodayNews implements LoadingBaseNews{
 			public void onPageScrollStateChanged(int arg0) {}
 			
 		});
-		
+		//刷新结束
 	    main_swiperefresh.onRefreshComplete();
 	    // 更新时间,时间延后一天
-	    MainActivity.sys_calendar.add(Calendar.DATE, -1);
+	    // TODO 日期待定 
+//	    MainActivity.sys_calendar.add(Calendar.DATE, -1);
 	}
 	
 }
