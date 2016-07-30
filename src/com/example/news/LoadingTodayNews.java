@@ -120,24 +120,9 @@ public class LoadingTodayNews implements LoadingBaseNews{
 		//设置点击下方ListView普通新闻时的监听器
 		lv_showshortcontent.setOnItemClickListener(new StoryItemClickListener(main.getApplicationContext(), stories_group));
 		
-		//为上方左右切换的头条新闻设置适配器
+		//为上方左右切换的头条新闻(ViewPage对象)设置适配器
 		hotstoriespagers.setAdapter(new HotStoriesPagersAdapter(main.getSupportFragmentManager(), m_topstoriesgroup));
 		hotstoriespagers.setVisibility(View.VISIBLE);
-		// 为上方左右切换的头条新闻添加点击监听器
-		hotstoriespagers.setOnClickListener(new View.OnClickListener() {
-			@SuppressLint("NewApi")
-			@Override
-			public void onClick(View arg0) {
-				int i = hotstoriespagers.getCurrentItem() + 1;
-				i = i < 5 ? i : i - 5;
-				Intent intent = new Intent(main, StoryContent.class);
-				intent.putExtra("stories_group", m_topstoriesgroup);
-				// 万万没想到，标记的时候这个是反着来的
-				intent.putExtra("story_order", i);
-				main.startActivity(intent);
-			}
-		});
-		
 		//ViewPage对象设置左右滑动监听器
 		hotstoriespagers.setOnPageChangeListener(new OnPageChangeListener() {
 			
@@ -153,6 +138,7 @@ public class LoadingTodayNews implements LoadingBaseNews{
 			
 			@Override
 			public void onPageScrollStateChanged(int arg0) {}
+			
 		});
 		
 	    main_swiperefresh.onRefreshComplete();

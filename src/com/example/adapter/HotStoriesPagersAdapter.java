@@ -10,6 +10,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
+/**
+ * 
+ * ViewPage对象的适配器
+ * @author lei
+ *
+ */
 public class HotStoriesPagersAdapter extends FragmentStatePagerAdapter {
 
 	private final String[] TITLES = { "one", "two", "three", "four", "five"};

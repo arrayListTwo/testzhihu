@@ -3,17 +3,17 @@
     android:id="@+id/rl_contain_topstories"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
+<!-- 上方头条新闻的布局文件 -->
     <ImageView
         android:id="@+id/img_show_topstory_img"
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:adjustViewBounds="true"
-        android:contentDescription="新闻图片"
         android:scaleType="centerCrop"
         android:src="@drawable/example" 
+        android:contentDescription="@string/abc_action_mode_done"
        	android:visibility="visible"/>
-
+    
      <TextView
          android:id="@+id/tv_show_topstory_title"
          android:layout_width="fill_parent"
@@ -22,11 +22,10 @@
          android:layout_marginBottom="30dp"
          android:layout_marginLeft="20dp"
          android:layout_marginRight="20dp"
-         android:text="如果兔子都在拼命的奔跑，作为乌龟的你为什么为什么还在继续向前？"
          android:textColor="#FFFFFF"
          android:textSize="20sp"
          android:visibility="visible"/>
-
+     
      <ProgressBar
          android:id="@+id/topstory_loading"
          android:layout_width="wrap_content"
