@@ -178,7 +178,6 @@ public class StoriesGetTask extends AsyncTask<Void, Integer, Boolean>{
 		}
 		return false;
 	}
-
 	
 	// 从网络上获得之前新闻
 	public boolean getPreNewsFromOnLine(){
