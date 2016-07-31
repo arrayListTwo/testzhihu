@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- 上方头条新闻ViewPage对象的子项布局 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_contain_topstories"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-<!-- 上方头条新闻的布局文件 -->
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/img_show_topstory_img"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
@@ -16,7 +18,7 @@
     
      <TextView
          android:id="@+id/tv_show_topstory_title"
-         android:layout_width="fill_parent"
+         android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_alignBottom="@id/img_show_topstory_img"
          android:layout_marginBottom="30dp"

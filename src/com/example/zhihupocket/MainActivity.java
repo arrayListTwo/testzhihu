@@ -129,7 +129,7 @@ public class MainActivity extends FragmentActivity {
 			//创建缓存目录，程序一启动就创建
 			File pic_cache = new File(Environment.getExternalStorageDirectory(), "zhihupocketcache");
 			if(!pic_cache.exists()){
-					pic_cache.mkdir();
+				pic_cache.mkdir();
 			}
 			
 			@SuppressWarnings("deprecation")
@@ -152,7 +152,6 @@ public class MainActivity extends FragmentActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -178,6 +177,10 @@ public class MainActivity extends FragmentActivity {
 	}
 	
 	// 特殊指令
+	/**
+	 * 
+	 */
+	// TODO 待处理
 	public void clearDBCache(){
 		AlertDialog.Builder builder = new Builder(MainActivity.this);
 		builder.setMessage("你确定清空缓存");
@@ -215,6 +218,10 @@ public class MainActivity extends FragmentActivity {
 		builder.create().show();
 	}	
 	
+	/**
+	 * @return
+	 */
+	// TODO 待处理
 	public boolean clearImageCache(){
 		File pic_cache = new File(Environment.getExternalStorageDirectory(), "zhihupocketcache");
 		if(!pic_cache.exists()){

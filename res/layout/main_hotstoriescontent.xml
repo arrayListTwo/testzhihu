@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- 今日新闻的布局文件，添加到主布局文件中的LinearLayout控件中 -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <!-- 是一个管理类，可允许用户左右切换当前的View  -->
+    <!-- ViewPager是一个管理类，可允许用户左右切换当前的View  -->
     <android.support.v4.view.ViewPager
 	    android:id="@+id/hotstoriespagers"
 	    android:layout_height="200dp"
@@ -60,6 +63,7 @@
             android:layout_marginRight="@dimen/dot_distance"
             android:background="@drawable/dot_normal" />
     </LinearLayout>
+    
     <!-- 今天的日期 -->
 	<TextView 
 	    android:id="@+id/tv_todaynews"
@@ -70,21 +74,7 @@
 		android:layout_marginLeft="10sp"
 		android:layout_marginRight="10sp"
 		android:layout_marginBottom="8sp"
-        android:textSize="22sp"
-        android:text=""/>
-	
-	<!-- <ListView
-	    android:id="@+id/lv_todaynews"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_todaynews"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-	    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-	    android:layout_marginRight="@dimen/activity_horizontal_margin"
-	    android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:divider="#00000000"
-        android:dividerHeight="4dp"
-	    ></ListView> -->
+        android:textSize="22sp"/>
 	
 	<!-- 下方普通新闻列表 -->
 	<com.example.zhihupocket.ListViewForScrollViewInMainXML 
