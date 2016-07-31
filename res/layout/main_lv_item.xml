@@ -11,15 +11,15 @@
 
     <ImageView
         android:id="@+id/iv_story_img"
-        android:layout_width="90sp"
+        android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
-        android:contentDescription="瞎扯"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/abc_action_bar_home_description"
         android:src="@drawable/example" />
     
     <TextView
@@ -31,7 +31,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="8dp"
-        android:text="请尽量只从纯技术角度看待 12 岁的「中国最小黑客」"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 

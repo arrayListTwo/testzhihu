@@ -58,11 +58,6 @@ public class StoryContent extends Activity{
 	 */
 	private ShareActionProvider mShareActionProvider;
 	
-	/**
-	 * 
-	 */
-	private String title;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -2,19 +2,18 @@
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
     <!-- 在活动主界面放置一个PullToRefreshScrollView控件 -->
     <!-- ptrAnimationStyle属性：设置刷新的时候，旋转效果 -->
-    <!-- ptrMode属性：下拉和上拉刷新是否支持 -->
 	<com.handmark.pulltorefresh.library.PullToRefreshScrollView	
 	  	xmlns:ptr="http://schemas.android.com/apk/res-auto"
 	    android:id="@+id/main_sv"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
 	    ptr:ptrAnimationStyle="flip"
-        ptr:ptrMode="both">
+        ptr:ptrMode="both">  <!-- ptrMode属性：下拉和上拉刷新是否支持 -->
 	   	<LinearLayout
 		  	android:id="@+id/main_rl"
 		    android:layout_width="match_parent"

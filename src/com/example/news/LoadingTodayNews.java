@@ -22,6 +22,7 @@ import com.example.zhihupocket.R;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 /**
+ * 加载今日新闻
  * @author lei
  *
  */
@@ -77,14 +78,14 @@ public class LoadingTodayNews implements LoadingBaseNews{
 		
 		//获取主布局中的LinearLayout组件对象
 		LinearLayout main_ll = (LinearLayout) main.findViewById(R.id.main_rl);
-		// 清除layout里面的视图
+		// 清除layout里面的视图（下拉刷新时，只会显示当天的新闻）
 		main_ll.removeAllViews();
 		//动态加载布局文件
 		LayoutInflater layoutInflater = LayoutInflater.from(main);
 		RelativeLayout hotstories_container = (RelativeLayout)layoutInflater.inflate(R.layout.main_hotstoriescontent, null);
 		//拿到第一个节点对象 ViewPager对象
 		hotstoriespagers = (ViewPager)hotstories_container.getChildAt(0);
-		// 包含原点的容器
+		//包含原点的容器
 		LinearLayout dots_container = (LinearLayout)hotstories_container.getChildAt(1);
 		//显示原点
 		dots_container.setVisibility(View.VISIBLE);
@@ -96,6 +97,7 @@ public class LoadingTodayNews implements LoadingBaseNews{
 		}
 		tv_todaynews = (TextView)hotstories_container.getChildAt(2);
 		lv_showshortcontent = (ListView)hotstories_container.getChildAt(3);
+		
 		//添加布局文件
 		main_ll.addView(hotstories_container);
 		
@@ -106,7 +108,7 @@ public class LoadingTodayNews implements LoadingBaseNews{
 		// 在ui线程中设置listview
 		// 先对这个进行赋值
 		m_topstoriesgroup = topstories_group;
-		//获取日期
+		//获取日期并给控件设置内容
 		String date = String.valueOf(MainActivity.sys_calendar.get(Calendar.YEAR)) + "年" + 
 		       String.valueOf(MainActivity.sys_calendar.get(Calendar.MONTH) + 1) + "月" + // 获取当前月份  
 		       String.valueOf(MainActivity.sys_calendar.get(Calendar.DAY_OF_MONTH)) + "日" // 获取当前月份的日期号码
@@ -141,9 +143,6 @@ public class LoadingTodayNews implements LoadingBaseNews{
 		});
 		//刷新结束
 	    main_swiperefresh.onRefreshComplete();
-	    // 更新时间,时间延后一天
-	    // TODO 日期待定 
-//	    MainActivity.sys_calendar.add(Calendar.DATE, -1);
 	}
 	
 }
